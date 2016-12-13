@@ -11,7 +11,7 @@ sumOfMultiples(Multiples, _) when Multiples == []->
 sumOfMultiples(Multiples, Range) ->
     Sequence  = [X || X <- lists:seq(1, Range - 1)],
     DivisibleSequence = get_divisible_sequence(Sequence, Multiples, []),
-    sum(remove_duplicates_from_list(DivisibleSequence)).
+    lists:sum(remove_duplicates_from_list(DivisibleSequence)).
 
 %% This solution with removing duplicates before summing works fine
 %% should make it that there are no duplicates, in the second iteration
@@ -22,16 +22,6 @@ get_divisible_sequence(Sequence, Multiples, Summables) ->
         T =/= [] -> get_divisible_sequence(Sequence, T, Summables ++ NewSequence);
         true -> Summables ++ NewSequence
     end.
-
-
-sum(L) -> 
-    sum(L, 0).
-
-sum([H|T], Acc) -> 
-    sum(T, H + Acc); 
-
-sum([], Acc) ->
-    Acc.
 
 remove_duplicates_from_list(X) ->
     sets:to_list(sets:from_list(X)).
