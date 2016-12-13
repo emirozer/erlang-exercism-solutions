@@ -11,10 +11,10 @@ sumOfMultiples(Multiples, _) when Multiples == []->
 sumOfMultiples(Multiples, Range) ->
     Sequence  = [X || X <- lists:seq(1, Range - 1)],
     DivisibleSequence = get_divisible_sequence(Sequence, Multiples, []),
+    %% This solution with removing duplicates before summing works fine
+    %% should make it that there are no duplicates, in the second iteration
     lists:sum(remove_duplicates_from_list(DivisibleSequence)).
 
-%% This solution with removing duplicates before summing works fine
-%% should make it that there are no duplicates, in the second iteration
 get_divisible_sequence(Sequence, Multiples, Summables) ->
     [H | T] = Multiples,
     NewSequence  = [X || X <- Sequence, X rem H == 0 ],
